@@ -1,0 +1,70 @@
+# fly.toml — ProteaAI web deployment configuration for Fly.io
+#
+# Setup:
+#   1. Install flyctl: https://fly.io/docs/hands-on/install-flyctl/
+#   2. fly auth login
+#   3. fly launch --no-deploy         # initializes app, creates volume
+#   4. fly volumes create proteaai_data --size 10  # 10 GB persistent volume
+#   5. fly secrets set JWT_SECRET=$(node -e "console.log(require('crypto').randomBytes(32).toString('hex'))")
+#   6. fly secrets set SECRET_KEY=$(node -e "console.log(require('crypto').randomBytes(32).toString('hex'))")
+#   7. fly deploy
+
+app = "proteaai"
+primary_region = "iad"   # Change to region closest to your users
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  PORT          = "3001"
+  NODE_ENV      = "production"
+  JWT_EXPIRES_IN = "7d"
+  PROTEAAI_DATA_DIR = "/data"
+
+# Secrets (set via `fly secrets set KEY=value`, never in this file):
+#   JWT_SECRET            required — 64-char random hex string
+#   SECRET_KEY            required — 64-char random hex string
+#   STRIPE_SECRET_KEY     optional — sk_live_... (for paid plans)
+#   STRIPE_WEBHOOK_SECRET optional — whsec_...
+#   STRIPE_PRO_PRICE_ID   optional — price_...
+#   APP_BASE_URL          required — https://your-app.fly.dev
+#   CORS_ORIGIN           required — same as APP_BASE_URL
+#   ANTHROPIC_API_KEY     optional
+#   OPENAI_API_KEY        optional
+#   GOOGLE_API_KEY        optional
+
+[[services]]
+  internal_port = 3001
+  protocol      = "tcp"
+
+  [[services.ports]]
+    handlers = ["http"]
+    port     = 80
+    force_https = true
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port     = 443
+
+  [services.concurrency]
+    type       = "requests"
+    soft_limit = 200
+    hard_limit = 250
+
+  [[services.http_checks]]
+    interval       = 30000   # ms
+    timeout        = 10000   # ms
+    grace_period   = "15s"
+    method         = "GET"
+    path           = "/health"
+    protocol       = "http"
+    restart_limit  = 3
+
+[[mounts]]
+  source      = "proteaai_data"
+  destination = "/data"
+
+[vm]
+  cpu_kind = "shared"
+  cpus     = 1
+  memory   = "512mb"
