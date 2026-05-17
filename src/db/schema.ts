@@ -30,7 +30,11 @@ export const subscriptions = sqliteTable("subscriptions", {
   userId: text("user_id")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
-  stripeCustomerId: text("stripe_customer_id").notNull(),
+  stripeCustomerId: text("stripe_customer_id").notNull().default(""),
+  payfastToken: text("payfast_token"),
+  paymentProvider: text("payment_provider", {
+    enum: ["stripe", "payfast"],
+  }),
   status: text("status", {
     enum: ["active", "canceled", "past_due", "trialing", "incomplete"],
   })

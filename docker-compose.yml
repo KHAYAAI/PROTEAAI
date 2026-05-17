@@ -36,6 +36,13 @@ services:
       STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET:-}
       STRIPE_PRO_PRICE_ID: ${STRIPE_PRO_PRICE_ID:-}
 
+      # PayFast — South African payment processor (optional)
+      PAYFAST_MERCHANT_ID: ${PAYFAST_MERCHANT_ID:-}
+      PAYFAST_MERCHANT_KEY: ${PAYFAST_MERCHANT_KEY:-}
+      PAYFAST_PASSPHRASE: ${PAYFAST_PASSPHRASE:-}
+      PAYFAST_SANDBOX: ${PAYFAST_SANDBOX:-true}
+      PAYFAST_PRO_AMOUNT: ${PAYFAST_PRO_AMOUNT:-149.00}
+
       # Public URL used for Stripe redirect URLs
       APP_BASE_URL: ${APP_BASE_URL:-http://localhost:3001}
 

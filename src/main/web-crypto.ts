@@ -17,11 +17,17 @@ const AUTH_TAG_LENGTH = 16;
 
 function getKey(): Buffer {
   const hex = process.env.SECRET_KEY ?? "";
+  if (!hex) {
+    throw new Error(
+      "SECRET_KEY environment variable is not set. " +
+        "Generate one with: node -e \"console.log(require('crypto').randomBytes(32).toString('hex'))\"",
+    );
+  }
   if (hex.length === 64) {
     return Buffer.from(hex, "hex");
   }
   // Derive a 256-bit key from whatever string is provided using SHA-256
-  return crypto.createHash("sha256").update(hex || "proteaai-default-key-change-me").digest();
+  return crypto.createHash("sha256").update(hex).digest();
 }
 
 /**

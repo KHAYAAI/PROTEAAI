@@ -20,6 +20,7 @@ import { createServer } from "http";
 import path from "node:path";
 import fs from "node:fs";
 import cors from "cors";
+import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import { wsManager } from "./ws_manager";
 import { setWebBroadcaster } from "../src/ipc/utils/safe_sender";
@@ -27,12 +28,35 @@ import { safeRoute } from "./middleware/safe_route";
 import { requireAuth } from "./middleware/auth";
 import { authRouter } from "./routes/auth";
 import { billingRouter } from "./routes/billing";
+import { payfastRouter } from "./routes/payfast";
 import { adminRouter } from "./routes/admin";
 import { gdprRouter } from "./routes/gdpr";
 import dotenv from "dotenv";
 
 // Load env vars
 dotenv.config();
+
+// ── Startup validation ────────────────────────────────────────────────────────
+// Crash immediately with a clear message rather than silently failing at runtime.
+
+const REQUIRED_ENV: Record<string, string> = {
+  JWT_SECRET: "Required to sign authentication tokens",
+  SECRET_KEY: "Required to encrypt user settings (64-char hex). Generate: node -e \"console.log(require('crypto').randomBytes(32).toString('hex'))\"",
+};
+
+for (const [key, hint] of Object.entries(REQUIRED_ENV)) {
+  if (!process.env[key]) {
+    console.error(`\n[FATAL] Environment variable ${key} is not set.\n  ${hint}\n`);
+    process.exit(1);
+  }
+}
+
+if (process.env.STRIPE_SECRET_KEY && !process.env.STRIPE_WEBHOOK_SECRET) {
+  console.warn("[WARN] STRIPE_SECRET_KEY is set but STRIPE_WEBHOOK_SECRET is missing. Stripe webhooks will be rejected.");
+}
+if (process.env.PAYFAST_MERCHANT_ID && !process.env.PAYFAST_PASSPHRASE) {
+  console.warn("[WARN] PAYFAST_MERCHANT_ID is set but PAYFAST_PASSPHRASE is missing. Payment signatures will be weaker.");
+}
 
 import { getProteaAIAppPath } from "../src/paths/paths";
 import { getMimeType } from "../src/ipc/utils/mime_utils";
@@ -57,6 +81,18 @@ registerIpcHandlers();
 const app = express();
 const PORT = Number(process.env.PORT ?? 3001);
 
+// Trust Fly.io / reverse proxy so rate-limiter sees real client IPs, not proxy IP
+app.set("trust proxy", 1);
+
+// Security headers (X-Content-Type-Options, X-Frame-Options, HSTS, etc.)
+app.use(
+  helmet({
+    // Allow the SPA to load in same origin; disable for embedded iframe use-cases
+    contentSecurityPolicy: false,
+    crossOriginEmbedderPolicy: false,
+  }),
+);
+
 // CORS
 const allowedOrigins = (process.env.CORS_ORIGIN ?? "http://localhost:5173")
   .split(",")
@@ -67,6 +103,12 @@ app.use(cors({ origin: allowedOrigins, credentials: true }));
 app.use(
   "/billing/webhook",
   express.raw({ type: "application/json" }),
+);
+
+// Raw body for PayFast ITN (url-encoded form data)
+app.use(
+  "/payfast/itn",
+  express.urlencoded({ extended: false }),
 );
 
 app.use(express.json({ limit: "50mb" }));
@@ -106,6 +148,10 @@ app.use("/auth", authLimiter, authRouter);
 // ── Billing routes (auth-protected) ──────────────────────────────────────────
 
 app.use("/billing", billingRouter);
+
+// ── PayFast routes (auth-protected; ITN is public but signature-verified) ────
+
+app.use("/payfast", payfastRouter);
 
 // ── Admin routes (admin-only) ─────────────────────────────────────────────────
 
