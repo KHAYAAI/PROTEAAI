@@ -1,7 +1,7 @@
 import type React from "react";
 import type { ReactNode } from "react";
 import { FileText } from "lucide-react";
-import { DyadBadge } from "./DyadCardPrimitives";
+import { ProteaAIBadge } from "./DyadCardPrimitives";
 
 interface ProteaAIReadProps {
   children?: ReactNode;
@@ -45,7 +45,7 @@ export const ProteaAIRead: React.FC<ProteaAIReadProps> = ({
       <div className="flex items-center gap-1 py-1">
         <FileText size={14} className="shrink-0 text-muted-foreground/50" />
         <span className="text-[13px] font-medium text-foreground/70">Read</span>
-        {appName && <DyadBadge color="sky">{appName}</DyadBadge>}
+        {appName && <ProteaAIBadge color="sky">{appName}</ProteaAIBadge>}
         {path && (
           <span
             className="text-[13px] truncate min-w-0"

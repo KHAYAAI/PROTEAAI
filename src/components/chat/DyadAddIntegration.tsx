@@ -19,7 +19,7 @@ import {
   Loader2,
 } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
-import { DyadCard, DyadCardHeader, DyadBadge } from "./DyadCardPrimitives";
+import { ProteaAICard, ProteaAICardHeader, ProteaAIBadge } from "./DyadCardPrimitives";
 import { getCompletedIntegrationProvider } from "./dyadAddIntegrationUtils";
 import { ipc } from "@/ipc/types";
 
@@ -213,17 +213,17 @@ export const DyadAddIntegration: React.FC<DyadAddIntegrationProps> = ({
   // provider. This covers historical replays of completed chats too.
   if (completedProvider && !pendingIntegration) {
     return (
-      <DyadCard accentColor="green" state="finished">
-        <DyadCardHeader icon={<CheckCircle2 size={15} />} accentColor="green">
-          <DyadBadge color="green">
+      <ProteaAICard accentColor="green" state="finished">
+        <ProteaAICardHeader icon={<CheckCircle2 size={15} />} accentColor="green">
+          <ProteaAIBadge color="green">
             {t("integrations.databaseSetup.integrationComplete")}
-          </DyadBadge>
+          </ProteaAIBadge>
           <span className="text-sm font-medium text-foreground">
             {t("integrations.databaseSetup.completeDescription", {
               provider: completedProviderName,
             })}
           </span>
-        </DyadCardHeader>
+        </ProteaAICardHeader>
         <div className="px-3 pb-3">
           <p className="text-sm text-muted-foreground">
             {t("integrations.databaseSetup.connectedToProject", {
@@ -238,7 +238,7 @@ export const DyadAddIntegration: React.FC<DyadAddIntegrationProps> = ({
             )}
           </p>
         </div>
-      </DyadCard>
+      </ProteaAICard>
     );
   }
 
@@ -248,15 +248,15 @@ export const DyadAddIntegration: React.FC<DyadAddIntegrationProps> = ({
   const isInteractive = !!pendingIntegration;
 
   return (
-    <DyadCard accentColor="blue">
-      <DyadCardHeader icon={<Database size={15} />} accentColor="blue">
-        <DyadBadge color="blue">
+    <ProteaAICard accentColor="blue">
+      <ProteaAICardHeader icon={<Database size={15} />} accentColor="blue">
+        <ProteaAIBadge color="blue">
           {t("integrations.databaseSetup.badge")}
-        </DyadBadge>
+        </ProteaAIBadge>
         <span className="text-sm font-medium text-foreground">
           {t("integrations.databaseSetup.chooseProvider")}
         </span>
-      </DyadCardHeader>
+      </ProteaAICardHeader>
       <div className="px-3 pb-3">
         {children && (
           <div className="text-xs text-muted-foreground mb-3">{children}</div>
@@ -349,9 +349,9 @@ export const DyadAddIntegration: React.FC<DyadAddIntegrationProps> = ({
                         {option.name}
                       </span>
                       {option.experimental && (
-                        <DyadBadge color="amber">
+                        <ProteaAIBadge color="amber">
                           {t("integrations.databaseSetup.experimental")}
-                        </DyadBadge>
+                        </ProteaAIBadge>
                       )}
                       <span
                         onClick={(e) => {
@@ -394,6 +394,6 @@ export const DyadAddIntegration: React.FC<DyadAddIntegrationProps> = ({
           </>
         )}
       </div>
-    </DyadCard>
+    </ProteaAICard>
   );
 };
