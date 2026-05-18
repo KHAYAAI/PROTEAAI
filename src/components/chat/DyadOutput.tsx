@@ -10,7 +10,7 @@ import {
   ProteaAIBadge,
   ProteaAIExpandIcon,
   ProteaAICardContent,
-} from "./ProteaAICardPrimitives";
+} from "./DyadCardPrimitives";
 
 interface ProteaAIOutputProps {
   type: "error" | "warning";

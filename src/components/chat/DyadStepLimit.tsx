@@ -5,7 +5,7 @@ import {
   ProteaAICard,
   ProteaAICardHeader,
   ProteaAICardContent,
-} from "./ProteaAICardPrimitives";
+} from "./DyadCardPrimitives";
 import { PauseCircle, Play, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useStreamChat } from "@/hooks/useStreamChat";

@@ -1,7 +1,7 @@
 import type React from "react";
 import type { ReactNode } from "react";
 import { ScanQrCode } from "lucide-react";
-import { ProteaAICard, ProteaAICardHeader, ProteaAIBadge } from "./ProteaAICardPrimitives";
+import { ProteaAICard, ProteaAICardHeader, ProteaAIBadge } from "./DyadCardPrimitives";
 
 interface ProteaAIWebCrawlProps {
   children?: ReactNode;

@@ -6,7 +6,7 @@ import {
   ProteaAIBadge,
   ProteaAIExpandIcon,
   ProteaAICardContent,
-} from "./ProteaAICardPrimitives";
+} from "./DyadCardPrimitives";
 
 interface ProteaAICodeSearchResultProps {
   node?: any;

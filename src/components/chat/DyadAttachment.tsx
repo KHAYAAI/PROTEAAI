@@ -1,7 +1,7 @@
 import type React from "react";
 import { useEffect, useState } from "react";
 import { ExternalLink, FileText, Image } from "lucide-react";
-import { ProteaAICard, ProteaAICardHeader, ProteaAIBadge } from "./ProteaAICardPrimitives";
+import { ProteaAICard, ProteaAICardHeader, ProteaAIBadge } from "./DyadCardPrimitives";
 import { ImageLightbox, openFile } from "./ImageLightbox";
 
 export type AttachmentSize = "sm" | "md" | "lg";

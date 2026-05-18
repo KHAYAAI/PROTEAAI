@@ -6,7 +6,7 @@ import {
   ProteaAIExpandIcon,
   ProteaAIFinishedIcon,
   ProteaAICardContent,
-} from "./ProteaAICardPrimitives";
+} from "./DyadCardPrimitives";
 import { CircleX, Loader2 } from "lucide-react";
 
 interface ProteaAIStatusProps {

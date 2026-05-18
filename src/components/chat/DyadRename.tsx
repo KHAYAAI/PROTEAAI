@@ -7,7 +7,7 @@ import {
   ProteaAIBadge,
   ProteaAIFilePath,
   ProteaAIDescription,
-} from "./ProteaAICardPrimitives";
+} from "./DyadCardPrimitives";
 import { CustomTagState } from "./stateTypes";
 
 interface ProteaAIRenameProps {

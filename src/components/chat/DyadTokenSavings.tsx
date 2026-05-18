@@ -1,7 +1,7 @@
 import React from "react";
 import { Zap } from "lucide-react";
 import { Tooltip, TooltipTrigger, TooltipContent } from "../ui/tooltip";
-import { ProteaAICard, ProteaAICardHeader } from "./ProteaAICardPrimitives";
+import { ProteaAICard, ProteaAICardHeader } from "./DyadCardPrimitives";
 
 interface ProteaAITokenSavingsProps {
   originalTokens: number;

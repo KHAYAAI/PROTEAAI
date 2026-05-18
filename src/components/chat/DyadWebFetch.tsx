@@ -5,7 +5,7 @@ import {
   ProteaAICardHeader,
   ProteaAIBadge,
   ProteaAIStateIndicator,
-} from "./ProteaAICardPrimitives";
+} from "./DyadCardPrimitives";
 import { CustomTagState } from "./stateTypes";
 
 interface ProteaAIWebFetchProps {

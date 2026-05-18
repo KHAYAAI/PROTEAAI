@@ -7,7 +7,7 @@ import {
   ProteaAIBadge,
   ProteaAIExpandIcon,
   ProteaAICardContent,
-} from "./ProteaAICardPrimitives";
+} from "./DyadCardPrimitives";
 
 interface ProteaAIMcpToolCallProps {
   node?: any;

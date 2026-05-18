@@ -8,7 +8,7 @@ import {
   ProteaAIExpandIcon,
   ProteaAIStateIndicator,
   ProteaAICardContent,
-} from "./ProteaAICardPrimitives";
+} from "./DyadCardPrimitives";
 
 interface ProteaAICodebaseContextProps {
   children: React.ReactNode;

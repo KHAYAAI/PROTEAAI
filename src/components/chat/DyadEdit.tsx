@@ -12,7 +12,7 @@ import {
   ProteaAIStateIndicator,
   ProteaAIDescription,
   ProteaAICardContent,
-} from "./ProteaAICardPrimitives";
+} from "./DyadCardPrimitives";
 
 interface ProteaAIEditProps {
   children?: ReactNode;

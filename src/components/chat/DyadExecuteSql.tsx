@@ -11,7 +11,7 @@ import {
   ProteaAIExpandIcon,
   ProteaAIStateIndicator,
   ProteaAICardContent,
-} from "./ProteaAICardPrimitives";
+} from "./DyadCardPrimitives";
 
 interface ProteaAIExecuteSqlProps {
   children?: ReactNode;

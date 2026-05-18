@@ -8,7 +8,7 @@ import {
   ProteaAIFilePath,
   ProteaAIDescription,
   ProteaAIStateIndicator,
-} from "./ProteaAICardPrimitives";
+} from "./DyadCardPrimitives";
 import { CustomTagState } from "./stateTypes";
 
 interface ProteaAICopyProps {

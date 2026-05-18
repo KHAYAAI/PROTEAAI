@@ -12,7 +12,7 @@ import {
   ProteaAIBadge,
   ProteaAIExpandIcon,
   ProteaAICardContent,
-} from "./ProteaAICardPrimitives";
+} from "./DyadCardPrimitives";
 
 interface ProteaAIAddDependencyProps {
   children?: ReactNode;

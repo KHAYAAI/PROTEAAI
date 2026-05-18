@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { ChevronRight } from "lucide-react";
-import { VanillaMarkdownParser } from "./ProteaAIMarkdownParser";
+import { VanillaMarkdownParser } from "./DyadMarkdownParser";
 import { CustomTagState } from "./stateTypes";
-import { ProteaAITokenSavings } from "./ProteaAITokenSavings";
+import { ProteaAITokenSavings } from "./DyadTokenSavings";
 
 interface ProteaAIThinkProps {
   node?: any;

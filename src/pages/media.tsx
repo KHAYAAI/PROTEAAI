@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAppMediaFiles } from "@/hooks/useAppMediaFiles";
 import { useLoadApps } from "@/hooks/useLoadApps";
 import { Image, ImagePlus, Loader2 } from "lucide-react";
-import { ProteaAIAppMediaFolder } from "@/components/ProteaAIAppMediaFolder";
+import { ProteaAIAppMediaFolder } from "@/components/DyadAppMediaFolder";
 import { LibrarySearchBar } from "@/components/LibrarySearchBar";
 import { Button } from "@/components/ui/button";
 import { ImageGeneratorDialog } from "@/components/ImageGeneratorDialog";

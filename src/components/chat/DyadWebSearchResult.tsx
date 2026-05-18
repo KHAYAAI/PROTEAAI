@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Globe } from "lucide-react";
-import { VanillaMarkdownParser } from "./ProteaAIMarkdownParser";
+import { VanillaMarkdownParser } from "./DyadMarkdownParser";
 import { CustomTagState } from "./stateTypes";
 import {
   ProteaAICard,
@@ -9,7 +9,7 @@ import {
   ProteaAIExpandIcon,
   ProteaAIStateIndicator,
   ProteaAICardContent,
-} from "./ProteaAICardPrimitives";
+} from "./DyadCardPrimitives";
 
 interface ProteaAIWebSearchResultProps {
   node?: any;

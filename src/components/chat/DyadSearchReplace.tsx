@@ -14,7 +14,7 @@ import {
   ProteaAIFilePath,
   ProteaAIDescription,
   ProteaAICardContent,
-} from "./ProteaAICardPrimitives";
+} from "./DyadCardPrimitives";
 
 interface ProteaAISearchReplaceProps {
   children?: ReactNode;

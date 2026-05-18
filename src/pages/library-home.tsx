@@ -14,7 +14,7 @@ import {
   LibraryFilterTabs,
   type FilterType,
 } from "@/components/LibraryFilterTabs";
-import { ProteaAIAppMediaFolder } from "@/components/ProteaAIAppMediaFolder";
+import { ProteaAIAppMediaFolder } from "@/components/DyadAppMediaFolder";
 import { ImageGeneratorDialog } from "@/components/ImageGeneratorDialog";
 import { ImageGenerationProgressButton } from "@/components/ImageGenerationProgressButton";
 import { filterMediaAppsByQuery } from "@/lib/mediaUtils";

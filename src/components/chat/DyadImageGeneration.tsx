@@ -10,7 +10,7 @@ import {
   ProteaAIExpandIcon,
   ProteaAIStateIndicator,
   ProteaAICardContent,
-} from "./ProteaAICardPrimitives";
+} from "./DyadCardPrimitives";
 import { ImageLightbox } from "./ImageLightbox";
 import { currentAppAtom } from "@/atoms/appAtoms";
 import { buildProteaAIMediaUrl } from "@/lib/dyadMediaUrl";

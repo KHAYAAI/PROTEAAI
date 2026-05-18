@@ -6,7 +6,7 @@ import {
   ProteaAICardHeader,
   ProteaAIBadge,
   ProteaAIStateIndicator,
-} from "./ProteaAICardPrimitives";
+} from "./DyadCardPrimitives";
 
 interface ProteaAIDatabaseSchemaProps {
   node: {

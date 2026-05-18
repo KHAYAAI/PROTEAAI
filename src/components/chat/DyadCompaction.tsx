@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Layers, ChevronDown, ChevronUp, Loader2 } from "lucide-react";
-import { VanillaMarkdownParser } from "./ProteaAIMarkdownParser";
+import { VanillaMarkdownParser } from "./DyadMarkdownParser";
 import { CustomTagState } from "./stateTypes";
 
 interface ProteaAICompactionProps {

@@ -9,7 +9,7 @@ import {
   ProteaAIExpandIcon,
   ProteaAIStateIndicator,
   ProteaAICardContent,
-} from "./ProteaAICardPrimitives";
+} from "./DyadCardPrimitives";
 
 interface ProteaAIWebSearchProps {
   children?: ReactNode;
