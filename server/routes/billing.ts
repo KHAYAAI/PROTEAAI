@@ -24,7 +24,7 @@ const STRIPE_PRO_PRICE_ID = process.env.STRIPE_PRO_PRICE_ID ?? "";
 // Only initialise Stripe if a key is configured (prevents crash on startup)
 let stripe: Stripe | null = null;
 if (STRIPE_SECRET_KEY) {
-  stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: "2025-03-31.basil" });
+  stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: "2026-03-25.dahlia" });
 }
 
 function requireStripe(res: { status: (n: number) => { json: (d: unknown) => void } }): Stripe | null {
@@ -174,7 +174,7 @@ async function handleStripeEvent(s: Stripe, event: Stripe.Event) {
           stripeCustomerId: session.customer as string,
           status: "active",
           plan: "pro",
-          currentPeriodEnd: new Date(stripeSub.current_period_end * 1000),
+          currentPeriodEnd: new Date((stripeSub as any).current_period_end * 1000),
           cancelAtPeriodEnd: stripeSub.cancel_at_period_end,
         })
         .onConflictDoUpdate({
@@ -184,7 +184,7 @@ async function handleStripeEvent(s: Stripe, event: Stripe.Event) {
             stripeCustomerId: session.customer as string,
             status: "active",
             plan: "pro",
-            currentPeriodEnd: new Date(stripeSub.current_period_end * 1000),
+            currentPeriodEnd: new Date((stripeSub as any).current_period_end * 1000),
             cancelAtPeriodEnd: stripeSub.cancel_at_period_end,
             updatedAt: new Date(),
           },
@@ -205,7 +205,7 @@ async function handleStripeEvent(s: Stripe, event: Stripe.Event) {
         .set({
           status: stripeSub.status as typeof subscriptions.$inferSelect["status"],
           plan: isActive ? "pro" : "free",
-          currentPeriodEnd: new Date(stripeSub.current_period_end * 1000),
+          currentPeriodEnd: new Date((stripeSub as any).current_period_end * 1000),
           cancelAtPeriodEnd: stripeSub.cancel_at_period_end,
           updatedAt: new Date(),
         })

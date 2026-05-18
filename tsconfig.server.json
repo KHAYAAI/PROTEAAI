@@ -14,14 +14,11 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["server/**/*.ts", "src/**/*.ts"],
+  "include": ["server/**/*.ts"],
   "exclude": [
     "node_modules",
     "dist",
     "out",
-    "src/renderer.tsx",
-    "src/web/**",
-    "src/preload.ts",
     "**/*.test.ts",
     "**/*.spec.ts",
     "e2e-tests/**"

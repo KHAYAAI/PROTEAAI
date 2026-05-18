@@ -19,9 +19,10 @@ import {
 import { eq, inArray } from "drizzle-orm";
 import { requireAuth } from "../middleware/auth";
 import { getCurrentUser } from "../../src/ipc/context/user-context";
-import { getProteaAIAppsBaseDirectory } from "../../src/paths/paths";
 import fs from "node:fs";
 import path from "node:path";
+
+const APPS_BASE_DIR = path.join(process.env.PROTEAAI_DATA_DIR ?? "/data", "proteaai-apps");
 
 export const gdprRouter = Router();
 
@@ -91,7 +92,7 @@ gdprRouter.delete("/me", requireAuth, async (_req, res) => {
     for (const app of userApps) {
       try {
         const userAppsDir = path.join(
-          getProteaAIAppsBaseDirectory(),
+          APPS_BASE_DIR,
           userId,
           app.path,
         );

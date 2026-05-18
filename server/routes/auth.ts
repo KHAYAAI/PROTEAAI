@@ -23,7 +23,7 @@ const BCRYPT_ROUNDS = 12;
 
 function signToken(userId: string): string {
   return jwt.sign({ sub: userId }, JWT_SECRET, {
-    expiresIn: JWT_EXPIRES_IN as string,
+    expiresIn: JWT_EXPIRES_IN as any,
   });
 }
 
