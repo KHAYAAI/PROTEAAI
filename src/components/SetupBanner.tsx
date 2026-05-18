@@ -37,7 +37,7 @@ import openrouterLogo from "../../assets/ai-logos/openrouter-logo.png";
 import { OnboardingBanner } from "./home/OnboardingBanner";
 import { showError } from "@/lib/toast";
 import { useSettings } from "@/hooks/useSettings";
-import { ProteaAIProTrialDialog } from "./ProteaAIProTrialDialog";
+import { ProteaAIProTrialDialog } from "./DyadProTrialDialog";
 
 type NodeInstallStep =
   | "install"
