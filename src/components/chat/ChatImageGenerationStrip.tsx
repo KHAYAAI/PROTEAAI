@@ -10,7 +10,7 @@ import {
   useCancelImageGeneration,
   useGenerateImage,
 } from "@/hooks/useGenerateImage";
-import { buildDyadMediaUrl } from "@/lib/dyadMediaUrl";
+import { buildProteaAIMediaUrl } from "@/lib/dyadMediaUrl";
 import { ImageLightbox } from "./ImageLightbox";
 import type { ImageGenerationJob } from "@/atoms/imageGenerationAtoms";
 
@@ -146,7 +146,7 @@ export function ChatImageGenerationStrip({
               <>
                 {job.result && (
                   <img
-                    src={buildDyadMediaUrl(
+                    src={buildProteaAIMediaUrl(
                       job.result.appPath,
                       job.result.fileName,
                     )}
@@ -186,7 +186,7 @@ export function ChatImageGenerationStrip({
 
       {lightboxJob?.result && (
         <ImageLightbox
-          imageUrl={buildDyadMediaUrl(
+          imageUrl={buildProteaAIMediaUrl(
             lightboxJob.result.appPath,
             lightboxJob.result.fileName,
           )}
