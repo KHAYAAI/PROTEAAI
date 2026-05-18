@@ -10,7 +10,7 @@
 #   docker run -p 3001:3001 --env-file .env proteaai-web
 
 # ── Stage 1: builder ─────────────────────────────────────────────────────────
-FROM node:24-bookworm-slim AS builder
+FROM node:22-bookworm-slim AS builder
 
 # Native deps required by better-sqlite3
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -33,7 +33,7 @@ RUN npm run build:web-client
 RUN npm run build:web-server
 
 # ── Stage 2: runtime ─────────────────────────────────────────────────────────
-FROM node:24-bookworm-slim AS runtime
+FROM node:22-bookworm-slim AS runtime
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     python3 make g++ \
