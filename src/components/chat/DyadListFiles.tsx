@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { CustomTagState } from "./stateTypes";
 import { FolderOpen } from "lucide-react";
 import {
-  DyadCard,
-  DyadCardHeader,
-  DyadBadge,
-  DyadExpandIcon,
-  DyadStateIndicator,
-  DyadCardContent,
+  ProteaAICard,
+  ProteaAICardHeader,
+  ProteaAIBadge,
+  ProteaAIExpandIcon,
+  ProteaAIStateIndicator,
+  ProteaAICardContent,
 } from "./DyadCardPrimitives";
 
 interface DyadListFilesProps {
@@ -35,36 +35,36 @@ export function DyadListFiles({ node, children }: DyadListFilesProps) {
   const title = directory ? directory : "List Files";
 
   return (
-    <DyadCard
+    <ProteaAICard
       state={state}
       accentColor="slate"
       isExpanded={isExpanded}
       onClick={() => setIsExpanded(!isExpanded)}
       data-testid="dyad-list-files"
     >
-      <DyadCardHeader icon={<FolderOpen size={15} />} accentColor="slate">
+      <ProteaAICardHeader icon={<FolderOpen size={15} />} accentColor="slate">
         <span className="font-medium text-sm text-foreground truncate">
           {title}
         </span>
-        {appName && <DyadBadge color="sky">{appName}</DyadBadge>}
-        {isRecursive && <DyadBadge color="slate">recursive</DyadBadge>}
+        {appName && <ProteaAIBadge color="sky">{appName}</ProteaAIBadge>}
+        {isRecursive && <ProteaAIBadge color="slate">recursive</ProteaAIBadge>}
         {isIncludeIgnored && (
-          <DyadBadge color="slate">include ignored</DyadBadge>
+          <ProteaAIBadge color="slate">include ignored</ProteaAIBadge>
         )}
         {isLoading && (
-          <DyadStateIndicator state="pending" pendingLabel="Listing..." />
+          <ProteaAIStateIndicator state="pending" pendingLabel="Listing..." />
         )}
         <div className="ml-auto">
-          <DyadExpandIcon isExpanded={isExpanded} />
+          <ProteaAIExpandIcon isExpanded={isExpanded} />
         </div>
-      </DyadCardHeader>
-      <DyadCardContent isExpanded={isExpanded}>
+      </ProteaAICardHeader>
+      <ProteaAICardContent isExpanded={isExpanded}>
         {content && (
           <div className="p-3 text-xs font-mono whitespace-pre-wrap max-h-60 overflow-y-auto bg-muted/20 rounded-lg">
             {content}
           </div>
         )}
-      </DyadCardContent>
-    </DyadCard>
+      </ProteaAICardContent>
+    </ProteaAICard>
   );
 }

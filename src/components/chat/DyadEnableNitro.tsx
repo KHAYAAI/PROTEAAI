@@ -1,10 +1,10 @@
 import React from "react";
 import { Server } from "lucide-react";
 import {
-  DyadCard,
-  DyadCardHeader,
-  DyadBadge,
-  DyadStateIndicator,
+  ProteaAICard,
+  ProteaAICardHeader,
+  ProteaAIBadge,
+  ProteaAIStateIndicator,
 } from "./DyadCardPrimitives";
 import { CustomTagState } from "./stateTypes";
 
@@ -21,14 +21,14 @@ export const DyadEnableNitro: React.FC<DyadEnableNitroProps> = ({ state }) => {
       ? "Nitro server layer setup aborted"
       : "Added Nitro server layer";
   return (
-    <DyadCard accentColor="emerald" state={state}>
-      <DyadCardHeader icon={<Server size={15} />} accentColor="emerald">
-        <DyadBadge color="emerald">Server layer</DyadBadge>
+    <ProteaAICard accentColor="emerald" state={state}>
+      <ProteaAICardHeader icon={<Server size={15} />} accentColor="emerald">
+        <ProteaAIBadge color="emerald">Server layer</ProteaAIBadge>
         <span className="text-sm font-medium text-foreground">{headline}</span>
         {state && (
-          <DyadStateIndicator state={state} abortedLabel="Did not finish" />
+          <ProteaAIStateIndicator state={state} abortedLabel="Did not finish" />
         )}
-      </DyadCardHeader>
+      </ProteaAICardHeader>
       {!isPending && !isAborted && (
         <div className="px-3 pb-3">
           <p className="text-xs text-muted-foreground leading-snug">
@@ -39,6 +39,6 @@ export const DyadEnableNitro: React.FC<DyadEnableNitroProps> = ({ state }) => {
           </p>
         </div>
       )}
-    </DyadCard>
+    </ProteaAICard>
   );
 };

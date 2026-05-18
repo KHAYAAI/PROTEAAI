@@ -3,12 +3,12 @@ import { useTranslation } from "react-i18next";
 import { CustomTagState } from "./stateTypes";
 import { Table2 } from "lucide-react";
 import {
-  DyadCard,
-  DyadCardHeader,
-  DyadBadge,
-  DyadExpandIcon,
-  DyadStateIndicator,
-  DyadCardContent,
+  ProteaAICard,
+  ProteaAICardHeader,
+  ProteaAIBadge,
+  ProteaAIExpandIcon,
+  ProteaAIStateIndicator,
+  ProteaAICardContent,
 } from "./DyadCardPrimitives";
 
 interface DyadDbTableSchemaProps {
@@ -35,46 +35,46 @@ export function DyadDbTableSchema({
   const content = typeof children === "string" ? children : "";
 
   return (
-    <DyadCard
+    <ProteaAICard
       state={state}
       accentColor="teal"
       onClick={() => setIsContentVisible(!isContentVisible)}
       isExpanded={isContentVisible}
     >
-      <DyadCardHeader icon={<Table2 size={15} />} accentColor="teal">
-        <DyadBadge color="teal">
+      <ProteaAICardHeader icon={<Table2 size={15} />} accentColor="teal">
+        <ProteaAIBadge color="teal">
           {table
             ? t("integrations.db.tableSchema")
             : t("integrations.db.tableSchemaProvider", { provider })}
-        </DyadBadge>
+        </ProteaAIBadge>
         {table && (
           <span className="font-medium text-sm text-foreground truncate">
             {table}
           </span>
         )}
         {isLoading && (
-          <DyadStateIndicator
+          <ProteaAIStateIndicator
             state="pending"
             pendingLabel={t("integrations.db.fetching")}
           />
         )}
         {isAborted && (
-          <DyadStateIndicator
+          <ProteaAIStateIndicator
             state="aborted"
             abortedLabel={t("integrations.db.didNotFinish")}
           />
         )}
         <div className="ml-auto">
-          <DyadExpandIcon isExpanded={isContentVisible} />
+          <ProteaAIExpandIcon isExpanded={isContentVisible} />
         </div>
-      </DyadCardHeader>
-      <DyadCardContent isExpanded={isContentVisible}>
+      </ProteaAICardHeader>
+      <ProteaAICardContent isExpanded={isContentVisible}>
         {content && (
           <div className="p-3 text-xs font-mono whitespace-pre-wrap max-h-80 overflow-y-auto bg-muted/20 rounded-lg">
             {content}
           </div>
         )}
-      </DyadCardContent>
-    </DyadCard>
+      </ProteaAICardContent>
+    </ProteaAICard>
   );
 }

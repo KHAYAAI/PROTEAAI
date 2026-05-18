@@ -3,12 +3,12 @@ import { useTranslation } from "react-i18next";
 import { CustomTagState } from "./stateTypes";
 import { BookOpen } from "lucide-react";
 import {
-  DyadCard,
-  DyadCardHeader,
-  DyadBadge,
-  DyadExpandIcon,
-  DyadStateIndicator,
-  DyadCardContent,
+  ProteaAICard,
+  ProteaAICardHeader,
+  ProteaAIBadge,
+  ProteaAIExpandIcon,
+  ProteaAIStateIndicator,
+  ProteaAICardContent,
 } from "./DyadCardPrimitives";
 
 interface DyadReadGuideProps {
@@ -29,30 +29,30 @@ export function DyadReadGuide({ node, children }: DyadReadGuideProps) {
   const isAborted = state === "aborted";
 
   return (
-    <DyadCard
+    <ProteaAICard
       state={state}
       accentColor="indigo"
       isExpanded={isExpanded}
       onClick={() => setIsExpanded(!isExpanded)}
     >
-      <DyadCardHeader icon={<BookOpen size={15} />} accentColor="indigo">
-        <DyadBadge color="indigo">{t("guide")}</DyadBadge>
+      <ProteaAICardHeader icon={<BookOpen size={15} />} accentColor="indigo">
+        <ProteaAIBadge color="indigo">{t("guide")}</ProteaAIBadge>
         {name && (
           <span className="text-sm text-foreground truncate">{name}</span>
         )}
-        {isLoading && <DyadStateIndicator state="pending" />}
-        {isAborted && <DyadStateIndicator state="aborted" />}
+        {isLoading && <ProteaAIStateIndicator state="pending" />}
+        {isAborted && <ProteaAIStateIndicator state="aborted" />}
         <div className="ml-auto">
-          <DyadExpandIcon isExpanded={isExpanded} />
+          <ProteaAIExpandIcon isExpanded={isExpanded} />
         </div>
-      </DyadCardHeader>
-      <DyadCardContent isExpanded={isExpanded}>
+      </ProteaAICardHeader>
+      <ProteaAICardContent isExpanded={isExpanded}>
         {children && (
           <div className="p-3 text-xs font-mono whitespace-pre-wrap max-h-80 overflow-y-auto bg-muted/20 rounded-lg">
             {children}
           </div>
         )}
-      </DyadCardContent>
-    </DyadCard>
+      </ProteaAICardContent>
+    </ProteaAICard>
   );
 }

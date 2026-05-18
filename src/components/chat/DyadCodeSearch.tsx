@@ -3,12 +3,12 @@ import { useState, type ReactNode } from "react";
 import { FileCode } from "lucide-react";
 import { CustomTagState } from "./stateTypes";
 import {
-  DyadCard,
-  DyadCardHeader,
-  DyadBadge,
-  DyadExpandIcon,
-  DyadStateIndicator,
-  DyadCardContent,
+  ProteaAICard,
+  ProteaAICardHeader,
+  ProteaAIBadge,
+  ProteaAIExpandIcon,
+  ProteaAIStateIndicator,
+  ProteaAICardContent,
 } from "./DyadCardPrimitives";
 
 interface DyadCodeSearchProps {
@@ -30,28 +30,28 @@ export const DyadCodeSearch: React.FC<DyadCodeSearchProps> = ({
   const inProgress = state === "pending";
 
   return (
-    <DyadCard
+    <ProteaAICard
       state={state}
       accentColor="indigo"
       onClick={() => setIsExpanded(!isExpanded)}
       isExpanded={isExpanded}
     >
-      <DyadCardHeader icon={<FileCode size={15} />} accentColor="indigo">
-        <DyadBadge color="indigo">Code Search</DyadBadge>
-        {appName && <DyadBadge color="sky">{appName}</DyadBadge>}
+      <ProteaAICardHeader icon={<FileCode size={15} />} accentColor="indigo">
+        <ProteaAIBadge color="indigo">Code Search</ProteaAIBadge>
+        {appName && <ProteaAIBadge color="sky">{appName}</ProteaAIBadge>}
         {!isExpanded && query && (
           <span className="text-sm text-muted-foreground italic truncate">
             {query}
           </span>
         )}
         {inProgress && (
-          <DyadStateIndicator state="pending" pendingLabel="Searching..." />
+          <ProteaAIStateIndicator state="pending" pendingLabel="Searching..." />
         )}
         <div className="ml-auto">
-          <DyadExpandIcon isExpanded={isExpanded} />
+          <ProteaAIExpandIcon isExpanded={isExpanded} />
         </div>
-      </DyadCardHeader>
-      <DyadCardContent isExpanded={isExpanded}>
+      </ProteaAICardHeader>
+      <ProteaAICardContent isExpanded={isExpanded}>
         <div className="text-sm text-muted-foreground space-y-2">
           {query && (
             <div>
@@ -72,7 +72,7 @@ export const DyadCodeSearch: React.FC<DyadCodeSearchProps> = ({
             </div>
           )}
         </div>
-      </DyadCardContent>
-    </DyadCard>
+      </ProteaAICardContent>
+    </ProteaAICard>
   );
 };

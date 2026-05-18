@@ -5,11 +5,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ipc } from "@/ipc/types";
 import { CodeHighlight } from "./CodeHighlight";
 import {
-  DyadBadge,
-  DyadCard,
-  DyadCardContent,
-  DyadCardHeader,
-  DyadExpandIcon,
+  ProteaAIBadge,
+  ProteaAICard,
+  ProteaAICardContent,
+  ProteaAICardHeader,
+  ProteaAIExpandIcon,
 } from "./DyadCardPrimitives";
 
 interface DyadScriptProps {
@@ -39,15 +39,15 @@ export const DyadScript: React.FC<DyadScriptProps> = ({ node, children }) => {
   }, [raw]);
 
   return (
-    <DyadCard
+    <ProteaAICard
       showAccent
       accentColor="amber"
       isExpanded={expanded}
       onClick={() => setExpanded((value) => !value)}
       data-testid="dyad-script-card"
     >
-      <DyadCardHeader icon={<ScrollText size={15} />} accentColor="amber">
-        <DyadBadge color="amber">Script</DyadBadge>
+      <ProteaAICardHeader icon={<ScrollText size={15} />} accentColor="amber">
+        <ProteaAIBadge color="amber">Script</ProteaAIBadge>
         <span className="text-sm text-foreground truncate">{description}</span>
         {executionMs && (
           <span className="text-xs text-muted-foreground shrink-0">
@@ -60,10 +60,10 @@ export const DyadScript: React.FC<DyadScriptProps> = ({ node, children }) => {
           </span>
         )}
         <div className="ml-auto">
-          <DyadExpandIcon isExpanded={expanded} />
+          <ProteaAIExpandIcon isExpanded={expanded} />
         </div>
-      </DyadCardHeader>
-      <DyadCardContent isExpanded={expanded}>
+      </ProteaAICardHeader>
+      <ProteaAICardContent isExpanded={expanded}>
         <div
           className="text-xs cursor-text"
           onClick={(event) => event.stopPropagation()}
@@ -120,7 +120,7 @@ export const DyadScript: React.FC<DyadScriptProps> = ({ node, children }) => {
             )}
           </Tabs>
         </div>
-      </DyadCardContent>
-    </DyadCard>
+      </ProteaAICardContent>
+    </ProteaAICard>
   );
 };
