@@ -1,0 +1,62 @@
+# ProteaAI AWS Deployment — Terraform Variables
+# Copy this file to terraform.tfvars and fill in your values
+
+# AWS
+region  = "us-east-1"  # Change to your preferred region
+environment = "prod"
+app_name = "proteaai"
+
+# Domain
+domain_name = "api.yourdomain.com"  # Change to your domain
+
+# Docker image (build and push to ECR first)
+# Build: docker build -t proteaai .
+# Tag:   docker tag proteaai:latest <account>.dkr.ecr.us-east-1.amazonaws.com/proteaai:latest
+# Push:  docker push <account>.dkr.ecr.us-east-1.amazonaws.com/proteaai:latest
+container_image = "<account>.dkr.ecr.us-east-1.amazonaws.com/proteaai:latest"
+container_port  = 3001
+
+# Database: "efs" for SQLite (simple, <50K users) or "rds" for PostgreSQL (production)
+database_type = "efs"
+
+# ===== REQUIRED SECRETS =====
+# Generate with: openssl rand -hex 32
+jwt_secret = "your-64-char-hex-string-for-jwt-secret"
+secret_key = "your-64-char-hex-string-for-settings-encryption"
+
+# ===== OPTIONAL: Stripe Integration =====
+stripe_secret_key      = ""  # sk_live_...
+stripe_webhook_secret  = ""  # whsec_...
+stripe_pro_price_id    = ""  # price_...
+
+# ===== OPTIONAL: PayFast Integration (South African ZAR payments) =====
+payfast_merchant_id  = ""  # From PayFast dashboard
+payfast_merchant_key = ""  # From PayFast dashboard
+payfast_passphrase   = ""  # Set in PayFast account settings
+payfast_sandbox      = "false"  # "true" for testing, "false" for production
+payfast_pro_amount   = "149.00"  # Monthly price in ZAR
+
+# ===== RDS Configuration (only for database_type = "rds") =====
+# If using PostgreSQL instead of EFS SQLite:
+# - Uncomment and fill in below
+# - Generate password with: openssl rand -hex 20 | head -c 40
+rds_username       = "proteaai"
+rds_password       = ""  # Must be 20+ chars with mixed case, numbers, special chars
+rds_instance_class = "db.t3.micro"  # t3.micro, t3.small, t3.medium, etc.
+
+# ===== ECS Configuration =====
+# Task size: adjust based on expected load
+# Development: 256 CPU, 512 MB memory
+# Small scale: 512 CPU, 1024 MB memory (default)
+# Medium scale: 1024 CPU, 2048 MB memory
+# Large scale: 2048 CPU, 4096 MB memory
+ecs_cpu    = 512
+ecs_memory = 1024
+
+# Auto-scaling limits
+ecs_min_capacity = 1   # At least 1 task running
+ecs_max_capacity = 4   # Scale up to 4 tasks under load
+
+# Scaling triggers
+ecs_target_cpu_utilization    = 70   # Scale when CPU > 70%
+ecs_target_memory_utilization = 80   # Scale when memory > 80%
