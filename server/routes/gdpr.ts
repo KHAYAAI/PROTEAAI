@@ -15,7 +15,7 @@ import {
   subscriptions,
   mcpServers,
   customThemes,
-} from "../../src/db/schema";
+} from "../../src/db";
 import { eq, inArray } from "drizzle-orm";
 import { requireAuth } from "../middleware/auth";
 import { getCurrentUser } from "../../src/ipc/context/user-context";

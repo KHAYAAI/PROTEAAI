@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "buildCommand": "npm run vercel-build",
+  "outputDirectory": "dist/web",
+  "functions": {
+    "api/server.ts": {
+      "maxDuration": 30
+    }
+  },
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api/server" },
+    { "src": "/auth/(.*)", "dest": "/api/server" },
+    { "src": "/billing/(.*)", "dest": "/api/server" },
+    { "src": "/payfast/(.*)", "dest": "/api/server" },
+    { "src": "/admin/(.*)", "dest": "/api/server" },
+    { "src": "/gdpr/(.*)", "dest": "/api/server" },
+    { "src": "/health", "dest": "/api/server" },
+    { "src": "/media/(.*)", "dest": "/api/server" },
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "dest": "/index.html" }
+  ]
+}

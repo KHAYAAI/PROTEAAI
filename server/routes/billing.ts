@@ -10,7 +10,7 @@
 import { Router } from "express";
 import Stripe from "stripe";
 import { db } from "../../src/db";
-import { subscriptions, users } from "../../src/db/schema";
+import { subscriptions, users } from "../../src/db";
 import { eq } from "drizzle-orm";
 import { requireAuth } from "../middleware/auth";
 import { getCurrentUser } from "../../src/ipc/context/user-context";

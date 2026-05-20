@@ -23,7 +23,7 @@ import { Router } from "express";
 import crypto from "node:crypto";
 import https from "node:https";
 import { db } from "../../src/db";
-import { subscriptions } from "../../src/db/schema";
+import { subscriptions } from "../../src/db";
 import { eq } from "drizzle-orm";
 import { requireAuth } from "../middleware/auth";
 import { getCurrentUser } from "../../src/ipc/context/user-context";

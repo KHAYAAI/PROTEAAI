@@ -13,7 +13,7 @@
 import type { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { db } from "../../src/db";
-import { users, subscriptions } from "../../src/db/schema";
+import { users, subscriptions } from "../../src/db";
 import { eq } from "drizzle-orm";
 import { runWithUserContext } from "../../src/ipc/context/user-context";
 import { jwtSecret as JWT_SECRET } from "../utils/jwt";

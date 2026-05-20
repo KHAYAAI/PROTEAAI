@@ -10,7 +10,7 @@
 
 import { Router } from "express";
 import { db } from "../../src/db";
-import { users, subscriptions, apps, chats, messages } from "../../src/db/schema";
+import { users, subscriptions, apps, chats, messages } from "../../src/db";
 import { eq, count, desc } from "drizzle-orm";
 import { requireAdmin } from "../middleware/auth";
 

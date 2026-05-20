@@ -12,7 +12,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from "uuid";
 import { db } from "../../src/db";
-import { users, subscriptions, userSettings } from "../../src/db/schema";
+import { users, subscriptions, userSettings } from "../../src/db";
 import { eq } from "drizzle-orm";
 import { jwtSecret as JWT_SECRET } from "../utils/jwt";
 
