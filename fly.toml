@@ -1,75 +1,47 @@
-# fly.toml — ProteaAI web deployment configuration for Fly.io
+# fly.toml app configuration file generated for proteaai-os on 2026-05-20T20:15:57Z
 #
-# Setup:
-#   1. Install flyctl: https://fly.io/docs/hands-on/install-flyctl/
-#   2. fly auth login
-#   3. fly launch --no-deploy         # initializes app, creates volume
-#   4. fly volumes create proteaai_data --size 10  # 10 GB persistent volume
-#   5. fly secrets set JWT_SECRET=$(node -e "console.log(require('crypto').randomBytes(32).toString('hex'))")
-#   6. fly secrets set SECRET_KEY=$(node -e "console.log(require('crypto').randomBytes(32).toString('hex'))")
-#   7. fly deploy
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
 
-app = "proteaai"
-primary_region = "iad"   # Change to region closest to your users
+app = 'proteaai-os'
+primary_region = 'iad'
 
 [build]
-  dockerfile = "Dockerfile"
+  dockerfile = 'Dockerfile'
 
 [env]
-  PORT              = "3001"
-  NODE_ENV          = "production"
-  JWT_EXPIRES_IN    = "7d"
-  PROTEAAI_DATA_DIR = "/data"
+  JWT_EXPIRES_IN = '7d'
+  NODE_ENV = 'production'
+  PORT = '3001'
+  PROTEAAI_DATA_DIR = '/data'
 
-# Secrets (set via `fly secrets set KEY=value`, never in this file):
-#   JWT_SECRET            required — 64-char random hex string
-#   SECRET_KEY            required — 64-char random hex string
-#   APP_BASE_URL          required — https://your-app.fly.dev
-#   CORS_ORIGIN           required — same as APP_BASE_URL
-#
-#   Stripe (optional — for card payments):
-#   STRIPE_SECRET_KEY     optional — sk_live_...
-#   STRIPE_WEBHOOK_SECRET optional — whsec_...
-#   STRIPE_PRO_PRICE_ID   optional — price_...
-#
-#   PayFast (optional — for South African ZAR payments):
-#   PAYFAST_MERCHANT_ID   optional — from PayFast dashboard
-#   PAYFAST_MERCHANT_KEY  optional — from PayFast dashboard
-#   PAYFAST_PASSPHRASE    optional — set in PayFast account settings (strongly recommended)
-#   PAYFAST_SANDBOX       optional — "false" for production (defaults to "true" = sandbox)
-#   PAYFAST_PRO_AMOUNT    optional — monthly price in ZAR (default: "149.00")
-#
-#   AI provider keys (users can also set these per-account):
-#   ANTHROPIC_API_KEY     optional
-#   OPENAI_API_KEY        optional
-#   GOOGLE_API_KEY        optional
+[[mounts]]
+  source = 'proteaai_data'
+  destination = '/data'
 
 [http_service]
   internal_port = 3001
-  force_https   = true
-  auto_stop_machines  = true
+  force_https = true
+  auto_stop_machines = 'stop'
   auto_start_machines = true
   min_machines_running = 0
 
   [http_service.concurrency]
-    type       = "requests"
-    soft_limit = 200
+    type = 'requests'
     hard_limit = 250
+    soft_limit = 200
+
+[checks]
+  [checks.health]
+    port = 3001
+    type = 'http'
+    interval = '30s'
+    timeout = '10s'
+    method = 'GET'
+    path = '/health'
 
 [[vm]]
-  cpu_kind = "shared"
-  cpus     = 1
-  memory   = "512mb"
-
-[[mounts]]
-  source      = "proteaai_data"
-  destination = "/data"
-
-[[checks]]
-  name     = "health"
-  port     = 3001
-  type     = "http"
-  interval = "30s"
-  timeout  = "10s"
-  path     = "/health"
-  method   = "GET"
+  memory = '512mb'
+  cpu_kind = 'shared'
+  cpus = 1
+  memory_mb = 512
