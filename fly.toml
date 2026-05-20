@@ -24,11 +24,22 @@ primary_region = "iad"   # Change to region closest to your users
 # Secrets (set via `fly secrets set KEY=value`, never in this file):
 #   JWT_SECRET            required — 64-char random hex string
 #   SECRET_KEY            required — 64-char random hex string
-#   STRIPE_SECRET_KEY     optional — sk_live_... (for paid plans)
-#   STRIPE_WEBHOOK_SECRET optional — whsec_...
-#   STRIPE_PRO_PRICE_ID   optional — price_...
 #   APP_BASE_URL          required — https://your-app.fly.dev
 #   CORS_ORIGIN           required — same as APP_BASE_URL
+#
+#   Stripe (optional — for card payments):
+#   STRIPE_SECRET_KEY     optional — sk_live_...
+#   STRIPE_WEBHOOK_SECRET optional — whsec_...
+#   STRIPE_PRO_PRICE_ID   optional — price_...
+#
+#   PayFast (optional — for South African ZAR payments):
+#   PAYFAST_MERCHANT_ID   optional — from PayFast dashboard
+#   PAYFAST_MERCHANT_KEY  optional — from PayFast dashboard
+#   PAYFAST_PASSPHRASE    optional — set in PayFast account settings (strongly recommended)
+#   PAYFAST_SANDBOX       optional — "false" for production (defaults to "true" = sandbox)
+#   PAYFAST_PRO_AMOUNT    optional — monthly price in ZAR (default: "149.00")
+#
+#   AI provider keys (users can also set these per-account):
 #   ANTHROPIC_API_KEY     optional
 #   OPENAI_API_KEY        optional
 #   GOOGLE_API_KEY        optional

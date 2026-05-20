@@ -35,6 +35,20 @@ function requireStripe(res: { status: (n: number) => { json: (d: unknown) => voi
   return stripe;
 }
 
+// ── GET /billing/config (public) ─────────────────────────────────────────────
+// Tells the frontend which payment providers are configured so it can render
+// the correct upgrade buttons without hard-coding provider availability.
+
+billingRouter.get("/config", (_req, res) => {
+  res.json({
+    ok: true,
+    data: {
+      stripe: !!process.env.STRIPE_SECRET_KEY,
+      payfast: !!process.env.PAYFAST_MERCHANT_ID,
+    },
+  });
+});
+
 // ── GET /billing/subscription ─────────────────────────────────────────────────
 
 billingRouter.get("/subscription", requireAuth, async (_req, res) => {
