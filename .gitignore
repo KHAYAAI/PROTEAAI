@@ -96,6 +96,7 @@ typings/
 
 # Vite
 .vite/
+vite.*.timestamp-*.mjs
 
 # Electron-Forge
 out/
