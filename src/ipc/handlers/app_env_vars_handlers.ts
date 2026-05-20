@@ -5,7 +5,7 @@
 import * as fs from "fs";
 import * as path from "path";
 import { db } from "../../db";
-import { apps } from "../../db/schema";
+import { apps } from "../../db";
 import { eq } from "drizzle-orm";
 import { getProteaAIAppPath } from "../../paths/paths";
 import {

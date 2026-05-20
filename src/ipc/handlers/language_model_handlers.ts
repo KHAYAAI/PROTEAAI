@@ -17,7 +17,7 @@ import {
   language_models,
   language_model_providers as languageModelProvidersSchema,
   language_models as languageModelsSchema,
-} from "@/db/schema";
+} from "@/db";
 import { and, eq } from "drizzle-orm";
 import { IpcMainInvokeEvent } from "electron";
 import { DyadError, DyadErrorKind } from "@/errors/dyad_error";

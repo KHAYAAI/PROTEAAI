@@ -5,7 +5,7 @@ import {
   type ImageThemeMode,
 } from "../types/image_generation";
 import { db } from "../../db";
-import { apps } from "../../db/schema";
+import { apps } from "../../db";
 import { getProteaAIAppPath } from "../../paths/paths";
 import { PROTEAAI_MEDIA_DIR_NAME } from "../utils/media_path_utils";
 import { safeJoin } from "../utils/path_utils";

@@ -1,5 +1,5 @@
 import { db } from "../../db";
-import { chats } from "../../db/schema";
+import { chats } from "../../db";
 import { eq } from "drizzle-orm";
 import {
   constructSystemPrompt,

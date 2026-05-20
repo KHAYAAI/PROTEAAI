@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { apps } from "@/db/schema";
+import { apps } from "@/db";
 import { eq } from "drizzle-orm";
 import { z } from "zod";
 import {

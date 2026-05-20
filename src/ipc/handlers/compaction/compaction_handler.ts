@@ -9,7 +9,7 @@ import log from "electron-log";
 import { eq } from "drizzle-orm";
 
 import { db } from "@/db";
-import { chats, messages } from "@/db/schema";
+import { chats, messages } from "@/db";
 import { readCurrentUserSettings } from "@/main/web-settings";
 import { getModelClient } from "@/ipc/utils/get_model_client";
 import {

@@ -1,7 +1,7 @@
 import { createTypedHandler } from "./base";
 import { mediaContracts } from "../types/media";
 import { db } from "../../db";
-import { apps } from "../../db/schema";
+import { apps } from "../../db";
 import { getProteaAIAppPath } from "../../paths/paths";
 import { safeJoin } from "../utils/path_utils";
 import { getMimeType, MIME_TYPE_MAP } from "../utils/mime_utils";

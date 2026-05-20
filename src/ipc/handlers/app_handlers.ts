@@ -13,7 +13,7 @@ const ipcMain = _electron?.ipcMain as typeof import("electron")["ipcMain"];
 const app = _electron?.app as typeof import("electron")["app"];
 const dialog = _electron?.dialog as typeof import("electron")["dialog"];
 import { db, getDatabasePath } from "../../db";
-import { apps, chats, messages } from "../../db/schema";
+import { apps, chats, messages } from "../../db";
 import { desc, eq, inArray, like } from "drizzle-orm";
 import { createTypedHandler, isWebMode, webHandlerRegistry } from "./base";
 import { appContracts } from "../types/app";

@@ -14,18 +14,13 @@ import { v4 as uuidv4 } from "uuid";
 import { db } from "../../src/db";
 import { users, subscriptions, userSettings } from "../../src/db";
 import { eq } from "drizzle-orm";
-import { jwtSecret as JWT_SECRET } from "../utils/jwt";
+import { jwtSecret as JWT_SECRET, createToken } from "../utils/jwt";
+import { revokeToken, isTokenRevoked } from "../../src/db/token-revocation";
 
 export const authRouter = Router();
 
 const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN ?? "7d";
 const BCRYPT_ROUNDS = 12;
-
-function signToken(userId: string): string {
-  return jwt.sign({ sub: userId }, JWT_SECRET, {
-    expiresIn: JWT_EXPIRES_IN as any,
-  });
-}
 
 function userResponse(user: typeof users.$inferSelect) {
   return {
@@ -99,7 +94,7 @@ authRouter.post("/register", async (req, res) => {
     });
 
     const user = await db.query.users.findFirst({ where: eq(users.id, userId) });
-    const token = signToken(userId);
+    const token = createToken(userId, JWT_EXPIRES_IN);
 
     res.status(201).json({ ok: true, data: { token, user: userResponse(user!) } });
   } catch (err) {
@@ -134,7 +129,7 @@ authRouter.post("/login", async (req, res) => {
       return;
     }
 
-    const token = signToken(user.id);
+    const token = createToken(user.id, JWT_EXPIRES_IN);
     res.json({ ok: true, data: { token, user: userResponse(user) } });
   } catch (err) {
     console.error("[auth/login]", err);
@@ -144,10 +139,32 @@ authRouter.post("/login", async (req, res) => {
 
 // ── POST /auth/logout ─────────────────────────────────────────────────────────
 
-authRouter.post("/logout", (_req, res) => {
-  // JWTs are stateless — client must delete the token.
-  // If token blocklist is needed in future, add it here.
-  res.json({ ok: true });
+authRouter.post("/logout", async (req, res) => {
+  try {
+    const authHeader = req.headers.authorization;
+    if (!authHeader?.startsWith("Bearer ")) {
+      res.json({ ok: true });
+      return;
+    }
+
+    const token = authHeader.slice(7);
+    let payload: { sub: string; jti?: string; exp?: number };
+    try {
+      payload = jwt.verify(token, JWT_SECRET) as { sub: string; jti?: string; exp?: number };
+    } catch {
+      res.json({ ok: true });
+      return;
+    }
+
+    if (payload.jti && payload.exp) {
+      await revokeToken(payload.jti, payload.sub, payload.exp);
+    }
+
+    res.json({ ok: true });
+  } catch (err) {
+    console.error("[auth/logout]", err);
+    res.json({ ok: true });
+  }
 });
 
 // ── GET /auth/me ──────────────────────────────────────────────────────────────
@@ -161,11 +178,16 @@ authRouter.get("/me", async (req, res) => {
     }
 
     const token = authHeader.slice(7);
-    let payload: { sub: string };
+    let payload: { sub: string; jti?: string };
     try {
-      payload = jwt.verify(token, JWT_SECRET) as { sub: string };
+      payload = jwt.verify(token, JWT_SECRET) as { sub: string; jti?: string };
     } catch {
       res.status(401).json({ ok: false, error: "Invalid or expired token" });
+      return;
+    }
+
+    if (payload.jti && await isTokenRevoked(payload.jti)) {
+      res.status(401).json({ ok: false, error: "Token has been revoked" });
       return;
     }
 

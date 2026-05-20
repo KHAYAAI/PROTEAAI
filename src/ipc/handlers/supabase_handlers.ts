@@ -1,7 +1,7 @@
 import log from "electron-log";
 import { db } from "../../db";
 import { eq } from "drizzle-orm";
-import { apps } from "../../db/schema";
+import { apps } from "../../db";
 import {
   getSupabaseClientForOrganization,
   listSupabaseBranches,

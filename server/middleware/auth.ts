@@ -17,6 +17,7 @@ import { users, subscriptions } from "../../src/db";
 import { eq } from "drizzle-orm";
 import { runWithUserContext } from "../../src/ipc/context/user-context";
 import { jwtSecret as JWT_SECRET } from "../utils/jwt";
+import { isTokenRevoked } from "../../src/db/token-revocation";
 
 /**
  * Express middleware that requires a valid JWT.
@@ -34,16 +35,21 @@ export function requireAuth(
   }
 
   const token = authHeader.slice(7);
-  let payload: { sub: string };
+  let payload: { sub: string; jti?: string };
   try {
-    payload = jwt.verify(token, JWT_SECRET) as { sub: string };
+    payload = jwt.verify(token, JWT_SECRET) as { sub: string; jti?: string };
   } catch {
     res.status(401).json({ ok: false, error: "Invalid or expired token" });
     return;
   }
 
-  // Async: look up user + subscription to build the full context
+  // Async: check token revocation, look up user + subscription
   (async () => {
+    if (payload.jti && await isTokenRevoked(payload.jti)) {
+      res.status(401).json({ ok: false, error: "Token has been revoked" });
+      return;
+    }
+
     const user = await db.query.users.findFirst({
       where: eq(users.id, payload.sub),
       with: { subscription: true },
@@ -86,15 +92,20 @@ export function optionalAuth(
   }
 
   const token = authHeader.slice(7);
-  let payload: { sub: string };
+  let payload: { sub: string; jti?: string };
   try {
-    payload = jwt.verify(token, JWT_SECRET) as { sub: string };
+    payload = jwt.verify(token, JWT_SECRET) as { sub: string; jti?: string };
   } catch {
     next();
     return;
   }
 
   (async () => {
+    if (payload.jti && await isTokenRevoked(payload.jti)) {
+      next();
+      return;
+    }
+
     const user = await db.query.users.findFirst({
       where: eq(users.id, payload.sub),
       with: { subscription: true },
@@ -132,15 +143,20 @@ export function requireAdmin(
   }
 
   const token = authHeader.slice(7);
-  let payload: { sub: string };
+  let payload: { sub: string; jti?: string };
   try {
-    payload = jwt.verify(token, JWT_SECRET) as { sub: string };
+    payload = jwt.verify(token, JWT_SECRET) as { sub: string; jti?: string };
   } catch {
     res.status(401).json({ ok: false, error: "Invalid or expired token" });
     return;
   }
 
   (async () => {
+    if (payload.jti && await isTokenRevoked(payload.jti)) {
+      res.status(401).json({ ok: false, error: "Token has been revoked" });
+      return;
+    }
+
     const user = await db.query.users.findFirst({
       where: eq(users.id, payload.sub),
     });

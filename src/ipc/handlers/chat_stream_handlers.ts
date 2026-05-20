@@ -16,7 +16,7 @@ import {
 } from "ai";
 
 import { db } from "../../db";
-import { chats, messages } from "../../db/schema";
+import { chats, messages } from "../../db";
 import { and, eq, isNull } from "drizzle-orm";
 import type {
   ChatMode,
@@ -71,7 +71,7 @@ import { getMaxTokens, getTemperature } from "../utils/token_utils";
 import { MAX_CHAT_TURNS_IN_CONTEXT } from "@/constants/settings_constants";
 import { validateChatContext } from "../utils/context_paths_utils";
 import { getProviderOptions, getAiHeaders } from "../utils/provider_options";
-import { mcpServers } from "../../db/schema";
+import { mcpServers } from "../../db";
 import { requireMcpToolConsent } from "../utils/mcp_consent";
 
 import { handleLocalAgentStream } from "../../pro/main/ipc/handlers/local_agent/local_agent_handler";
@@ -105,7 +105,7 @@ import {
   parseMediaMentions,
   stripResolvedMediaMentions,
 } from "@/shared/parse_media_mentions";
-import { prompts as promptsTable } from "../../db/schema";
+import { prompts as promptsTable } from "../../db";
 import { inArray } from "drizzle-orm";
 import { replacePromptReference } from "../utils/replacePromptReference";
 import { replaceSlashSkillReference } from "../utils/replaceSlashSkillReference";

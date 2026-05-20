@@ -11,7 +11,7 @@ import {
 } from "../../neon_admin/neon_management_client";
 import { neonContracts, type NeonBranch } from "../types/neon";
 import { db } from "../../db";
-import { apps } from "../../db/schema";
+import { apps } from "../../db";
 import { eq } from "drizzle-orm";
 import { EndpointType } from "@neondatabase/api-client";
 import { retryOnLocked } from "../utils/retryOnLocked";

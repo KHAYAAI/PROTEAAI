@@ -1,6 +1,6 @@
 import log from "electron-log";
 import { db } from "../../db";
-import { mcpServers, mcpToolConsents } from "../../db/schema";
+import { mcpServers, mcpToolConsents } from "../../db";
 import { eq, and } from "drizzle-orm";
 import { createTypedHandler } from "./base";
 import { getCurrentUser } from "../../ipc/context/user-context";

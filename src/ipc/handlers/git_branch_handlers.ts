@@ -24,7 +24,7 @@ import {
 } from "../utils/git_utils";
 import { getProteaAIAppPath } from "../../paths/paths";
 import { db } from "../../db";
-import { apps } from "../../db/schema";
+import { apps } from "../../db";
 import { eq } from "drizzle-orm";
 import log from "electron-log";
 import { withLock } from "../utils/lock_utils";

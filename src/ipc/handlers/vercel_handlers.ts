@@ -1,9 +1,9 @@
 import { IpcMainInvokeEvent } from "electron";
 import { Vercel } from "@vercel/sdk";
 import { readCurrentUserSettings, writeCurrentUserSettings } from "../../main/web-settings";
-import * as schema from "../../db/schema";
+import * as schema from "../../db";
 import { db } from "../../db";
-import { apps } from "../../db/schema";
+import { apps } from "../../db";
 import { eq } from "drizzle-orm";
 import log from "electron-log";
 import { IS_TEST_BUILD } from "../utils/test_utils";

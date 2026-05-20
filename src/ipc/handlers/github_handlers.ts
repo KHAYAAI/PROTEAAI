@@ -26,11 +26,11 @@ import {
   isGitRebaseInProgress,
   GitConflictError,
 } from "../utils/git_utils";
-import * as schema from "../../db/schema";
+import * as schema from "../../db";
 import fs from "node:fs";
 import { getProteaAIAppPath, isAppLocationAccessible } from "../../paths/paths";
 import { db } from "../../db";
-import { apps } from "../../db/schema";
+import { apps } from "../../db";
 import { eq } from "drizzle-orm";
 import { GithubUser } from "../../lib/schemas";
 import log from "electron-log";

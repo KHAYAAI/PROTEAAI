@@ -1,5 +1,5 @@
 import { db } from "../../db";
-import { apps, chats, messages } from "../../db/schema";
+import { apps, chats, messages } from "../../db";
 import { desc, eq, and, like } from "drizzle-orm";
 import type { ChatSearchResult, ChatSummary } from "../../lib/schemas";
 

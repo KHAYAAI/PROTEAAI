@@ -2,7 +2,7 @@ import { createLoggedHandler } from "./safe_handle";
 import log from "electron-log";
 import { AppUpgrade } from "@/ipc/types";
 import { db } from "../../db";
-import { apps } from "../../db/schema";
+import { apps } from "../../db";
 import { eq } from "drizzle-orm";
 import { getProteaAIAppPath } from "../../paths/paths";
 import fs from "node:fs";

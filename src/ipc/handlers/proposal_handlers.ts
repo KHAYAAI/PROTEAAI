@@ -5,7 +5,7 @@ import type {
   ActionProposal,
 } from "../../lib/schemas";
 import { db } from "../../db";
-import { messages, chats } from "../../db/schema";
+import { messages, chats } from "../../db";
 import { desc, eq, and } from "drizzle-orm";
 import path from "node:path"; // Import path for basename
 // Import tag parsers

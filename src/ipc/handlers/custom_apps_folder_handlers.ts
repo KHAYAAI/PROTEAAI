@@ -3,7 +3,7 @@ import { mkdir } from "fs/promises";
 import log from "electron-log";
 import { join, isAbsolute, normalize } from "path";
 import { db } from "../../db";
-import { apps } from "../../db/schema";
+import { apps } from "../../db";
 import { eq } from "drizzle-orm";
 import { createTypedHandler } from "./base";
 import { systemContracts } from "../types/system";

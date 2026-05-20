@@ -16,7 +16,7 @@ import { miscContracts, SESSION_DEBUG_SCHEMA_VERSION } from "../types/misc";
 import type { SystemDebugInfo } from "../types/system";
 import type { SessionDebugBundle } from "../types/misc";
 import type { UserSettings } from "@/lib/schemas";
-import type { AiMessagesJsonV6 } from "../../db/schema";
+import type { AiMessagesJsonV6 } from "../../db";
 
 import log from "electron-log";
 import path from "path";
@@ -30,7 +30,7 @@ import {
   language_model_providers,
   language_models,
   mcpServers,
-} from "../../db/schema";
+} from "../../db";
 import { eq } from "drizzle-orm";
 import { getProteaAIAppPath } from "../../paths/paths";
 import { validateChatContext } from "../utils/context_paths_utils";

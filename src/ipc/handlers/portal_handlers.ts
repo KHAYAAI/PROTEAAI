@@ -1,7 +1,7 @@
 import { createLoggedHandler } from "./safe_handle";
 import log from "electron-log";
 import { db } from "../../db";
-import { apps } from "../../db/schema";
+import { apps } from "../../db";
 import { eq } from "drizzle-orm";
 import { getProteaAIAppPath } from "../../paths/paths";
 import { spawn } from "child_process";

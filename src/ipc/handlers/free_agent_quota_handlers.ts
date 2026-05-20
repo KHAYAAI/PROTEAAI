@@ -1,5 +1,5 @@
 import { db } from "../../db";
-import { messages, chats, apps } from "../../db/schema";
+import { messages, chats, apps } from "../../db";
 import { eq, and, inArray } from "drizzle-orm";
 import { getCurrentUser } from "../../ipc/context/user-context";
 import { createTypedHandler } from "./base";

@@ -3,9 +3,9 @@ import path from "path";
 import { createLoggedHandler } from "./safe_handle";
 import log from "electron-log";
 import { getProteaAIAppPath, isAppLocationAccessible } from "../../paths/paths";
-import { apps } from "@/db/schema";
+import { apps } from "@/db";
 import { db } from "@/db";
-import { chats } from "@/db/schema";
+import { chats } from "@/db";
 import { eq } from "drizzle-orm";
 
 import { ImportAppParams, ImportAppResult } from "@/ipc/types";

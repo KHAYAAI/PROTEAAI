@@ -1,6 +1,6 @@
 import log from "electron-log";
 import { db } from "@/db";
-import { prompts } from "@/db/schema";
+import { prompts } from "@/db";
 import { eq } from "drizzle-orm";
 import { createTypedHandler } from "./base";
 import { promptContracts } from "../types/prompts";

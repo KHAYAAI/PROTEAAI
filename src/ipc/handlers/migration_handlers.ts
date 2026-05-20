@@ -4,7 +4,7 @@ import { migrationContracts } from "../types/migration";
 import { DyadError, DyadErrorKind } from "@/errors/dyad_error";
 import { IS_TEST_BUILD } from "../utils/test_utils";
 import { db } from "../../db";
-import { apps } from "../../db/schema";
+import { apps } from "../../db";
 import { getDyadAppPath } from "../../paths/paths";
 import {
   logger,

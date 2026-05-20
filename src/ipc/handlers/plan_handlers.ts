@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { db } from "../../db";
-import { apps } from "../../db/schema";
+import { apps } from "../../db";
 import { eq } from "drizzle-orm";
 import { getProteaAIAppPath } from "../../paths/paths";
 import log from "electron-log";

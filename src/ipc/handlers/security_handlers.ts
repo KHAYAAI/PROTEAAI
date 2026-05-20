@@ -1,5 +1,5 @@
 import { db } from "../../db";
-import { chats, messages } from "../../db/schema";
+import { chats, messages } from "../../db";
 import { eq, and, like, desc } from "drizzle-orm";
 import { createTypedHandler } from "./base";
 import { securityContracts } from "../types/security";

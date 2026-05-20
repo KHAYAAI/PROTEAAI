@@ -1,5 +1,5 @@
 import { db } from "../../db";
-import { messages, apps, chats } from "../../db/schema";
+import { messages, apps, chats } from "../../db";
 import { eq } from "drizzle-orm";
 import { getProteaAIAppPath } from "../../paths/paths";
 import { executeAddDependency } from "../processors/executeAddDependency";
