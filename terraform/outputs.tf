@@ -1,3 +1,18 @@
+output "ecr_repository_url" {
+  description = "ECR repository URL — use this to tag and push your Docker image"
+  value       = module.ecr.repository_url
+}
+
+output "docker_build_and_push_commands" {
+  description = "Commands to build and push Docker image to ECR"
+  value       = <<-EOT
+    aws ecr get-login-password --region ${var.region} | docker login --username AWS --password-stdin ${module.ecr.registry_id}.dkr.ecr.${var.region}.amazonaws.com
+    docker build -t ${var.app_name} .
+    docker tag ${var.app_name}:latest ${module.ecr.repository_url}:latest
+    docker push ${module.ecr.repository_url}:latest
+  EOT
+}
+
 output "alb_dns_name" {
   description = "DNS name of the Application Load Balancer"
   value       = module.alb.alb_dns_name

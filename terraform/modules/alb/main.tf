@@ -142,14 +142,5 @@ resource "aws_acm_certificate_validation" "main" {
   }
 }
 
-# Optional: Security group rule to allow ECS to access ALB
-resource "aws_security_group_rule" "alb_to_ecs" {
-  type                     = "ingress"
-  from_port                = var.container_port
-  to_port                  = var.container_port
-  protocol                 = "tcp"
-  source_security_group_id = var.alb_security_group_id
-
-  # This would need the ECS security group ID passed as a variable
-  # For now, this is handled in the networking module
-}
+# Security group rules are handled in the networking module.
+# The ECS security group already allows ingress from the ALB security group on container_port.

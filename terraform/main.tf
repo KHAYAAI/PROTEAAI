@@ -29,6 +29,14 @@ provider "aws" {
   }
 }
 
+# ECR Repository (build and push Docker image here before deploying ECS)
+module "ecr" {
+  source = "./modules/ecr"
+
+  app_name    = var.app_name
+  environment = var.environment
+}
+
 # VPC and Networking
 module "networking" {
   source = "./modules/networking"
